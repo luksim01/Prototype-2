@@ -16,9 +16,18 @@ public class DetectCollision : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider otherObject)
     {
-        Destroy(gameObject);
-        Destroy(other.gameObject);
+        // if colliding object is an apple
+        if(otherObject.name.Contains("Apple"))
+        {
+            Destroy(gameObject);
+            Destroy(otherObject.gameObject);
+        }
+        // alternative colliding object is the player
+        else
+        {
+            Debug.Log("Game Over!");
+        }
     }
 }
