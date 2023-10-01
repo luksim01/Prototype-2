@@ -4,26 +4,41 @@ using UnityEngine;
 
 public class DestroyOutofBounds : MonoBehaviour
 {
-    private float topBound = 20;
-    private float bottomBound = -20;
+    private float zBoundary = 20;
+    private float xBoundary = 25;
+
+    private GameUI gameUI;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        // reference PlayerTracker script to make use of methods
+        gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.z > topBound)
+        // check if any animals get beyond the boundaries
+        if (transform.position.z > zBoundary)
         {
             Destroy(gameObject);
+            gameUI.decreaseLivesBy(1);
         }
-        else if (transform.position.z < bottomBound)
+        else if (transform.position.z < -zBoundary)
         {
-            // game over message if animals make it past player
             Destroy(gameObject);
-            Debug.Log("Game Over!");
+            gameUI.decreaseLivesBy(1);
+        }
+        else if (transform.position.x > xBoundary)
+        {
+            Destroy(gameObject);
+            gameUI.decreaseLivesBy(1);
+        }
+        else if (transform.position.x < -xBoundary)
+        {
+            Destroy(gameObject);
+            gameUI.decreaseLivesBy(1);
         }
     }
 }

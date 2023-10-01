@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class DetectCollision : MonoBehaviour
 {
+    private GameUI gameUI;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        // reference PlayerTracker script to make use of methods
+        gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
     }
 
     // Update is called once per frame
@@ -21,13 +24,15 @@ public class DetectCollision : MonoBehaviour
         // if colliding object is an apple
         if(otherObject.name.Contains("Apple"))
         {
+            // both apple and animal are destroyed and score is incremented
+            gameUI.increaseScoreBy(1);
             Destroy(gameObject);
             Destroy(otherObject.gameObject);
         }
         // alternative colliding object is the player
         else
         {
-            Debug.Log("Game Over!");
+            gameUI.decreaseLivesBy(1);
         }
     }
 }

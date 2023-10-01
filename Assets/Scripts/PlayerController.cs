@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float horizontalInput;
-    public float verticalInput;
-    public float speed = 10.0f;
-    public int xBoundary = 15;
-    public int zBoundary = 8;
+    private float horizontalInput;
+    private float verticalInput;
+    private float speed = 10.0f;
+    private int xBoundary = 15;
+    private int zBoundary = 8;
     public GameObject projectilePrefab;
 
     // Start is called before the first frame update
