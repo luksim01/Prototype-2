@@ -1,38 +1,17 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DetectCollision : MonoBehaviour
+public class DetectCollisions : MonoBehaviour
 {
-    private GameUI gameUI;
-
-    // Start is called before the first frame update
-    void Start()
+    void OnTriggerEnter(Collider other)
     {
-        // reference PlayerTracker script to make use of methods
-        gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
+        // Instead of destroying the projectile when it collides with an animal
+        //Destroy(other.gameObject); 
+
+        // Just deactivate the food and destroy the animal
+        other.gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    private void OnTriggerEnter(Collider otherObject)
-    {
-        // if colliding object is an apple
-        if(otherObject.name.Contains("Apple"))
-        {
-            // both apple and animal are destroyed and score is incremented
-            gameUI.increaseScoreBy(1);
-            Destroy(gameObject);
-            Destroy(otherObject.gameObject);
-        }
-        // alternative colliding object is the player
-        else
-        {
-            gameUI.decreaseLivesBy(1);
-        }
-    }
 }
